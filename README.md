@@ -158,10 +158,6 @@ Common issues and solutions:
    - Check internet connection
    - Clear browser cache
 
-## License
-
-[MIT License](LICENSE)
-
 ## Contact
 
 For support or queries, please contact [zhenghao.ni@mail.utoronto.ca]
