@@ -4,6 +4,7 @@ import folium
 import datetime
 import dotenv
 import json
+import requests
 
 dotenv.load_dotenv()
 
@@ -49,34 +50,37 @@ def rescue_team_page():
         st.title("Rescue Team Command Center")
     # 初始化 fire_reports 数据
     if "fire_reports" not in st.session_state:
-        st.session_state["fire_reports"] = []  # 用于存储所有的火灾报告数据
-
-    # 模拟数据（用于测试，可以用 resident.py 的数据代替）
+        st.session_state["fire_reports"] = request_fire_reports()
+        st.success("Fire reports loaded successfully!")
     if not st.session_state["fire_reports"]:
-        st.session_state["fire_reports"] = [
-            {
-                "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=10),
-                "location": "Toronto, ON",
-                "description": "Major fire near downtown area.",
-                "severity": "Major",
-                "gps": [43.651070, -79.347015],
-                "photo": None,
-                "user_id": "user_1",
-                "chat_history": [
-                    {"sender": "user_1", "message": "Please send help!", "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=15)},
-                ]
-            },
-            {
-                "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=30),
-                "location": "North York, ON",
-                "description": "Minor fire near a park.",
-                "severity": "Minor",
-                "gps": [43.761539, -79.411079],
-                "photo": None,
-                "user_id": "user_2",
-                "chat_history": []
-            },
-        ]
+        st.markdown("No reports available.")
+
+    # # 模拟数据（用于测试，可以用 resident.py 的数据代替）
+    # if not st.session_state["fire_reports"]:
+    #     st.session_state["fire_reports"] = [
+    #         {
+    #             "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=10),
+    #             "location": "Toronto, ON",
+    #             "description": "Major fire near downtown area.",
+    #             "severity": "Major",
+    #             "gps": [43.651070, -79.347015],
+    #             "photo": None,
+    #             "user_id": "user_1",
+    #             "chat_history": [
+    #                 {"sender": "user_1", "message": "Please send help!", "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=15)},
+    #             ]
+    #         },
+    #         {
+    #             "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=30),
+    #             "location": "North York, ON",
+    #             "description": "Minor fire near a park.",
+    #             "severity": "Minor",
+    #             "gps": [43.761539, -79.411079],
+    #             "photo": None,
+    #             "user_id": "user_2",
+    #             "chat_history": []
+    #         },
+    #     ]
 
     # 主页面内容
     col1, col2 = st.columns([2, 1])
@@ -87,6 +91,8 @@ def rescue_team_page():
         # 显示所有火灾报告的定位点
         m = folium.Map(location=[43.7, -79.4], zoom_start=10)
         for report in st.session_state["fire_reports"]:
+            print("report")
+            print(report)
             folium.Marker(
                 location=report["gps"],
                 popup=report["description"],
@@ -98,13 +104,15 @@ def rescue_team_page():
     # 信息板
     with col2:
         st.subheader("Information Board")
+        if st.button("Refresh Reports"):
+            st.session_state["fire_reports"] = request_fire_reports()
         if not st.session_state["fire_reports"]:
             st.markdown("No reports available.")
         else:
             for idx, report in enumerate(sorted(st.session_state["fire_reports"], key=lambda x: x["timestamp"], reverse=True)):
-                with st.expander(f"[{report['severity']}] {report['location']} ({report['timestamp'].strftime('%Y-%m-%d %H:%M:%S')})"):
+                with st.expander(f"[{report['severity']}] {report['location']} ({report['timestamp']})"):
                     st.write(f"**Description:** {report['description']}")
-                    st.write(f"**Reported at:** {report['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}")
+                    st.write(f"**Reported at:** {report['timestamp']}")
                     st.write(f"**User ID:** {report['user_id']}")
 
                     # 显示地图定位
@@ -136,6 +144,16 @@ def rescue_team_page():
                             st.success("Message sent successfully!")
                         else:
                             st.error("Message cannot be empty.")
+
+
+def request_fire_reports():
+    url = "http://localhost:5000/api/fire_reports"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return []
+
 
 if __name__ == "__main__":
     rescue_team_page()

@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import requests
+import datetime
 
 def resident_page():
     st.set_page_config(
@@ -45,12 +46,18 @@ def resident_page():
             severity = st.selectbox("Fire Severity", ["Minor", "Moderate", "Major"])
             photo = st.file_uploader("Upload Photos (Optional)")
             submitted = st.form_submit_button("Submit Report")
+            timestamp = datetime.datetime.now().isoformat()
+            user_id = timestamp
             if submitted:
                 report_data = {
                     "location": loc,
                     "description": desc,
                     "severity": severity,
-                    "photo": photo.getvalue() if photo else None
+                    "photo": photo.getvalue() if photo else None,
+                    "timestamp": timestamp,
+                    "gps": [43.651070, -79.347015],
+                    "user_id": user_id,
+                    "chat_history": []
                 }
                 response = submit_fire_report(report_data)
                 if response.get("status") == "success":

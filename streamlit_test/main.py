@@ -59,11 +59,38 @@ def main():
             # 与 pages/2_Resident.py 对应的页面名称“Resident”
             st.switch_page("pages/resident.py")
 
+
+
+
+
+
+
     st.markdown("---")
-    st.markdown("#### System Features:")
-    st.markdown("- Rescue teams can view all fire reports and manage rescue operations")
-    st.markdown("- Residents can report fire locations and view safety information")
-    st.markdown("- Real-time updates on fire development")
+    st.markdown("<h3 style='text-align: center;'>🔥 Don't panic, WE ARE HERE TO HELP!!! 🔥</h3>", unsafe_allow_html=True)
+    st.markdown(
+    """
+    <p style='text-align: center;'>😊❤️🌟</p>
+    <p style='text-align: justify;'>
+        This is a communication system designed to assist during sudden wildfire emergencies. Residents and evacuees can use 
+        this platform to stay in real-time contact with rescue teams, preserving STRONG HOPE in the face of danger. Whether 
+        you're sharing critical information about fire locations or awaiting guidance, we are here to support you every step of the way.
+    </p>
+    <h4>Key Features:</h4>
+    <ul>
+        <li><b>Rescue Team Portal:</b> Access detailed wildfire reports, coordinate rescue operations, and respond to residents efficiently.</li>
+        <li><b>Resident Portal:</b> Upload maps, share GPS-tagged messages, and send photos to inform rescue teams about the situation.</li>
+        <li><b>Real-Time Communication:</b> Stay updated with immediate responses from the rescue team to ensure timely action.</li>
+        <li><b>Interactive Updates:</b> Residents can ask follow-up questions and receive guidance directly from the rescue team.</li>
+        <li><b>Organized Information Board:</b> Rescue teams can manage messages based on urgency, view user locations, and access chat histories for better coordination.</li>
+    </ul>
+    <p style='text-align: justify;'>
+        Stay calm and follow the instructions provided by the rescue teams carefully. Together, we can navigate through this 
+        challenging time and ensure everyone's safety. Stay hopeful, stay strong, and remember—help is on the way! 💪💖
+    </p>
+    """,
+    unsafe_allow_html=True
+)
+
 
 if __name__ == "__main__":
     main()
