@@ -2,6 +2,9 @@ import streamlit as st
 from streamlit_folium import st_folium
 import folium
 import datetime
+import dotenv
+
+dotenv.load_dotenv()
 
 def rescue_team_page():
     # 如果没验证过密码，或密码标记为错误，就不给访问

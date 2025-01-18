@@ -1,4 +1,8 @@
 import streamlit as st
+import dotenv
+import os
+
+dotenv.load_dotenv()
 
 def main():
     st.set_page_config(
@@ -37,7 +41,8 @@ def main():
                                      type="password",
                                      key="rescue_password_input")
             if st.button("Submit Password"):
-                if password == "admin123":
+                passwd = os.getenv("RESCUE_TEAM_PASSWORD")
+                if password == passwd:
                     st.session_state.password_correct = True
                     st.success("Password correct! Redirecting...")
                     # 与 pages/1_Rescue_Team.py 对应的页面名称“Rescue Team”
