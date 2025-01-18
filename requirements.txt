@@ -1,0 +1,54 @@
+altair==5.5.0
+attrs==24.3.0
+blinker @ file:///croot/blinker_1696539051175/work
+branca==0.8.1
+cachetools==5.5.0
+certifi==2024.12.14
+charset-normalizer==3.4.1
+click @ file:///croot/click_1698129812380/work
+decorator==5.1.1
+Flask @ file:///croot/flask_1716545870149/work
+folium==0.19.4
+future==1.0.0
+geocoder==1.38.1
+gitdb==4.0.12
+GitPython==3.1.44
+idna==3.10
+itsdangerous @ file:///croot/itsdangerous_1716533337253/work
+Jinja2 @ file:///croot/jinja2_1730902924303/work
+jsonschema==4.23.0
+jsonschema-specifications==2024.10.1
+markdown-it-py==3.0.0
+MarkupSafe @ file:///croot/markupsafe_1736366905094/work
+mdurl==0.1.2
+narwhals==1.22.0
+numpy==2.2.1
+packaging==24.2
+pandas==2.2.3
+pillow==11.1.0
+protobuf==5.29.3
+pyarrow==19.0.0
+pydeck==0.9.1
+Pygments==2.19.1
+python-dateutil==2.9.0.post0
+python-dotenv @ file:///croot/python-dotenv_1669132557191/work
+pytz==2024.2
+ratelim==0.1.6
+referencing==0.36.1
+requests==2.32.3
+rich==13.9.4
+rpds-py==0.22.3
+six==1.17.0
+smmap==5.0.2
+streamlit==1.41.1
+streamlit-geolocation==0.0.10
+streamlit_folium==0.24.0
+tenacity==9.0.0
+toml==0.10.2
+tornado==6.4.2
+typing_extensions==4.12.2
+tzdata==2024.2
+urllib3==2.3.0
+watchdog==6.0.0
+Werkzeug @ file:///croot/werkzeug_1731005776056/work
+xyzservices==2025.1.0
