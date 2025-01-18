@@ -1,6 +1,10 @@
 #filename: main.py
 
 import streamlit as st
+import dotenv
+import os
+
+dotenv.load_dotenv()
 
 def check_password():
     """Returns `True` if the user had the correct password."""
@@ -10,10 +14,14 @@ def check_password():
     
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        if st.session_state["password_input"] == "admin123":
+        passwd = os.getenv("RESCUE_PASSWD")
+        if st.session_state["password_input"] == passwd:
+            print("Password correct")
             st.session_state.password_correct = True
             return True
         else:
+            print("Password incorrect")
+            print("passwd:", passwd)
             st.session_state.password_correct = False
             return False
 
