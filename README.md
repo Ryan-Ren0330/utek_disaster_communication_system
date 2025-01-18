@@ -40,20 +40,25 @@ wildfire-status-system/
 
 ## Prerequisites
 
-- Python 3.10 or higher
+- Python 
 - pip (Python package installer)
 - Modern web browser with location services enabled
 
 ## Dependencies
 
 ```
-streamlit==1.24.0
-flask==2.0.1
-folium==0.12.1
-requests==2.26.0
-python-dotenv==0.19.0
-streamlit-folium==0.7.0
-streamlit-geolocation==1.0.1
+streamlit==1.41.1
+Flask==3.0.3
+folium==0.19.4
+requests==2.32.3
+python-dotenv==0.21.0
+streamlit-folium==0.24.0
+streamlit-geolocation==0.0.10
+altair==5.5.0
+pandas==2.2.3
+numpy==2.2.1
+Pillow==11.1.0
+geocoder==1.38.1
 ```
 
 ## Installation
@@ -103,7 +108,6 @@ The application will open in your default web browser at http://localhost:8501
 2. Allow location access when prompted
 3. Report incidents using the form
 4. Monitor rescue team responses in the message center
-5. View the interactive map for nearby incidents
 
 ### For Rescue Teams:
 1. Click "Access Rescue Team Portal"
