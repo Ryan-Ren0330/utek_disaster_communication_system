@@ -1,33 +1,40 @@
+#filename: main.py
+
 import streamlit as st
 
 def check_password():
     """Returns `True` if the user had the correct password."""
-    def password_entered():
-        """Checks whether a password entered by the user is correct."""
-        if st.session_state["password"] == "admin123":  # Hardcoded password
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store password
-        else:
-            st.session_state["password_correct"] = False
-
-    if "password_correct" not in st.session_state:
-        st.text_input(
-            "Please enter the rescue team password", 
-            type="password", 
-            on_change=password_entered, 
-            key="password"
-        )
-        return False
+    if "password_error" not in st.session_state:
+        st.session_state.password_error = False
+        
+    password = st.text_input(
+        "Please enter the rescue team password", 
+        type="password",
+        key="password_input"
+    )
     
-    return st.session_state["password_correct"]
+    if st.button("Submit", key="submit_password"):
+        if password == "admin123":  # Hardcoded password
+            st.session_state["password_correct"] = True
+            st.switch_page("pages/rescue_team.py")  # 直接在密码验证成功后跳转
+            return True
+        else:
+            st.session_state.password_error = True
+            st.error("Incorrect password. Please try again.")
+            return False
+            
+    if st.session_state.password_error:
+        return False
+        
+    return False
 
 def main():
     st.set_page_config(
         page_title="Wildfire Status Update System",
         page_icon="🔥",
         layout="wide",
-        menu_items={},  # Hide menu
-        initial_sidebar_state="collapsed"  # Hide sidebar
+        menu_items={},
+        initial_sidebar_state="collapsed"
     )
 
     # Hide streamlit default elements
@@ -55,10 +62,7 @@ def main():
         Monitor fire situations and manage rescue operations
         """)
         if st.button("Access Rescue Team Portal", key="rescue_team", use_container_width=True):
-            if check_password():
-                st.switch_page("pages/rescue_team.py")
-            else:
-                st.error("Please enter the correct password to access the Rescue Team Portal")
+            check_password()  # 移除额外的页面跳转判断
 
     # Resident Portal
     with col2:

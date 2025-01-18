@@ -1,8 +1,10 @@
+# filename: resident.py
+
 import streamlit as st
 
 def resident_page():
     st.set_page_config(
-        page_title="Resident Portal",
+        page_title="Resident11 Portal",
         page_icon="🏘️",
         layout="wide",
         menu_items={},  # Hide menu
