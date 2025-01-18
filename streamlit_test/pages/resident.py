@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+import requests
 
 def resident_page():
     st.set_page_config(
@@ -45,13 +46,35 @@ def resident_page():
             photo = st.file_uploader("Upload Photos (Optional)")
             submitted = st.form_submit_button("Submit Report")
             if submitted:
-                st.success("Fire report submitted!")
+                report_data = {
+                    "location": loc,
+                    "description": desc,
+                    "severity": severity,
+                    "photo": photo.getvalue() if photo else None
+                }
+                response = submit_fire_report(report_data)
+                if response.get("status") == "success":
+                    st.success("Fire report submitted successfully!")
+                else:
+                    print(response)
+                    st.error("Failed to submit fire report.")
 
         st.markdown("---")
         st.subheader("Safety Information")
         st.markdown("- Nearest Shelters")
         st.markdown("- Recommended Evacuation Routes")
         st.markdown("- Rescue Team Locations")
+
+
+def submit_fire_report(data):
+    url = "http://localhost:5000/api/form"
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    if response.status_code != 200:
+        print(response.text)
+        return {"status": "error", "message": "Failed to submit fire report."}
+    return response.json()
+
 
 if __name__ == "__main__":
     resident_page()
