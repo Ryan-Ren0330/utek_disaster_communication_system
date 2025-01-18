@@ -1,4 +1,4 @@
-# filename: rescue_team.py
+# filename: pages/rescue_team.py
 
 import streamlit as st
 
