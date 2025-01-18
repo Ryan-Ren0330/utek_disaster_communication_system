@@ -111,7 +111,7 @@ The application will open in your default web browser at http://localhost:8501
 
 ### For Rescue Teams:
 1. Click "Access Rescue Team Portal"
-2. Enter the secure password
+2. Enter the secure password admin123
 3. View all reported incidents on the map
 4. Manage incidents through the information board
 5. Communicate with residents through the chat interface
