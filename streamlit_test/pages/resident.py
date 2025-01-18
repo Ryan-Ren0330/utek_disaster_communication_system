@@ -20,6 +20,10 @@ def resident_page():
         st.session_state.location = None
     if 'fire_reports' not in st.session_state:
         st.session_state.fire_reports = []
+    if 'chat_history' not in st.session_state:
+        st.session_state.chat_history = []
+    if 'user_id' not in st.session_state:
+        st.session_state.user_id = f"user_{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
     # Hide default Streamlit UI
     hide_streamlit_style = """
@@ -102,7 +106,11 @@ def resident_page():
         # Render the map
         st_folium(m, width=700, height=500)
 
-        st.header("🔍 Location Status")
+
+
+    with col_right:
+        st.subheader("Report Fire Incident")
+        st.subheader("🔍 Location Status")
 
     # Get location from geolocation function
         location_data = streamlit_geolocation()
@@ -117,9 +125,6 @@ def resident_page():
                 st.warning(f"Unexpected data: {location_data}")
         else:
             st.warning("No location captured yet. Press the button to allow location access.")
-
-    with col_right:
-        st.subheader("Report Fire Incident")
         with st.form("fire_report"):
             loc = st.text_input("Location Description")
             desc = st.text_area("Detailed Description")
@@ -137,6 +142,7 @@ def resident_page():
                     st.error("Location data is required. Please allow location access.")
                 else:
                     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    user_id = f"user_{timestamp}" if not st.session_state.user_id else st.session_state.user_id
                     photo_data = base64.b64encode(photo.read()).decode('utf-8') if photo else None
                     report_data = {
                         "location": loc,
@@ -148,7 +154,7 @@ def resident_page():
                             st.session_state.location['latitude'],
                             st.session_state.location['longitude']
                         ],
-                        "user_id": f"user_{len(st.session_state.fire_reports) + 1}",
+                        "user_id": user_id,
                         "chat_history": []
                     }
                     response = submit_fire_report(report_data)
@@ -160,11 +166,33 @@ def resident_page():
                         st.error("Failed to submit fire report.")
 
         st.markdown("---")
+        st.subheader("Messages from Rescue Team")
+
+        # Fetch chat history
+        if not st.session_state.user_id:
+            st.session_state.user_id = f"user_{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        user_id = st.session_state.user_id
+        
+        # Refresh button to get the latest chat history
+        if st.button("🔄 Refresh Messages"):
+            st.session_state.chat_history = fetch_history(user_id)
+            st.success("Chat history refreshed!")
+
+        # Display chat history
+        if st.session_state.chat_history:
+            for chat in st.session_state.chat_history:
+                sender = chat.get("sender", "Rescue Team")
+                message = chat.get("message", "No message")
+                timestamp = chat.get("timestamp", "Unknown time")
+                st.markdown(f"**{sender}** [{timestamp}]: {message}")
+        else:
+            st.markdown("No messages from the rescue team yet.")
+
+        st.markdown("---")
         st.subheader("Safety Information")
         st.markdown("- Nearest Shelters")
         st.markdown("- Recommended Evacuation Routes")
         st.markdown("- Rescue Team Locations")
-
 
 
 def submit_fire_report(data):

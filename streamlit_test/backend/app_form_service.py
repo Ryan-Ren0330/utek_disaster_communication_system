@@ -49,6 +49,7 @@ def add_chat_history():
 @app.route("/api/fetch_chat_history", methods=["POST"])
 def fetch_chat_history():
     data = request.json
+    print(data["user_id"])
     data_path = "../data/form_data.json"
     with open(data_path, "r") as f:
         form_data = json.load(f)
