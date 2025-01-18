@@ -1,34 +1,32 @@
-#filename: main.py
+# filename: main.py
 
 import streamlit as st
 
 def check_password():
-    """Returns `True` if the user had the correct password."""
-    if "password_error" not in st.session_state:
-        st.session_state.password_error = False
-        
+    """Handles password input and validation."""
+    # 初始化 session_state 的密码状态
+    if "password_correct" not in st.session_state:
+        st.session_state["password_correct"] = False
+
+    # 输入密码
     password = st.text_input(
         "Please enter the rescue team password", 
         type="password",
         key="password_input"
     )
-    
+
+    # 提交密码的逻辑
     if st.button("Submit", key="submit_password"):
-        if password == "admin123":  # Hardcoded password
+        if password == "admin123":  # 硬编码的密码
             st.session_state["password_correct"] = True
-            st.switch_page("pages/rescue_team.py")  # 直接在密码验证成功后跳转
-            return True
         else:
-            st.session_state.password_error = True
+            st.session_state["password_correct"] = False
             st.error("Incorrect password. Please try again.")
-            return False
-            
-    if st.session_state.password_error:
-        return False
-        
-    return False
+
+    return st.session_state["password_correct"]
 
 def main():
+    # 页面基本配置
     st.set_page_config(
         page_title="Wildfire Status Update System",
         page_icon="🔥",
@@ -37,7 +35,7 @@ def main():
         initial_sidebar_state="collapsed"
     )
 
-    # Hide streamlit default elements
+    # 隐藏 Streamlit 默认的菜单和页脚
     hide_streamlit_style = """
         <style>
         #MainMenu {visibility: hidden;}
@@ -48,32 +46,36 @@ def main():
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     
-    # Main page title
+    # 主标题
     st.title("Wildfire Status Update System")
     st.markdown("### Select Your Role")
 
-    # Create two-column layout
+    # 创建两列布局
     col1, col2 = st.columns(2)
 
-    # Rescue Team Portal
+    # 救援队门户
     with col1:
         st.markdown("""
         ### Rescue Team Portal
         Monitor fire situations and manage rescue operations
         """)
         if st.button("Access Rescue Team Portal", key="rescue_team", use_container_width=True):
-            check_password()  # 移除额外的页面跳转判断
+            # 显示密码输入
+            if check_password():
+                st.success("Password correct! Redirecting to Rescue Team Portal...")
+                st.experimental_rerun()  # 防止刷新状态丢失
+                st.switch_page("rescue_team")  # 跳转到 rescue_team 页面
 
-    # Resident Portal
+    # 居民门户
     with col2:
         st.markdown("""
         ### Resident Portal
         Report fires and view safety information
         """)
         if st.button("Access Resident Portal", key="resident", use_container_width=True):
-            st.switch_page("pages/resident.py")
+            st.switch_page("resident")  # 跳转到 resident 页面
 
-    # Add system information
+    # 添加系统功能说明
     st.markdown("---")
     st.markdown("""
     #### System Features:
