@@ -1,1 +1,21 @@
-[]
+[
+    {
+        "location": "ba3135",
+        "description": "is on fire",
+        "severity": "Moderate",
+        "photo": null,
+        "timestamp": "2025-01-18 22:54:04",
+        "gps": [
+            43.6597833,
+            -79.3974347
+        ],
+        "user_id": "user_2025-01-18 22:53:26",
+        "chat_history": [
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:54:58",
+                "message": "1234567"
+            }
+        ]
+    }
+]
