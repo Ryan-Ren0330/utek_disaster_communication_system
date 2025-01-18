@@ -1,54 +1,64 @@
 [
     {
-        "location": "location",
-        "description": "detail",
+        "location": "ba1190",
+        "description": "Prof is on Fire!",
         "severity": "Minor",
         "photo": null,
-        "timestamp": "2025-01-18T21:10:33.641066",
+        "timestamp": "2025-01-18 21:58:19",
         "gps": [
-            43.65107,
-            -79.347015
+            43.6597447,
+            -79.3974864
         ],
-        "user_id": "2025-01-18T21:10:33.641066",
-        "chat_history": []
+        "user_id": "user_1",
+        "chat_history": [
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:04:24",
+                "message": "asdf"
+            },
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:05:16",
+                "message": "asdfasdf"
+            },
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:05:24",
+                "message": "woshishabi"
+            },
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:08:00",
+                "message": "fasdgasfgkjlsdhfgkjaszhdg"
+            },
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:08:20",
+                "message": "what?"
+            },
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:08:21",
+                "message": "what?"
+            },
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-18 22:08:29",
+                "message": "what??"
+            }
+        ]
     },
     {
-        "location": "location",
-        "description": "detaillllll",
+        "location": "Cheese!",
+        "description": "no cheese",
         "severity": "Minor",
         "photo": null,
-        "timestamp": "2025-01-18T21:14:22.124373",
+        "timestamp": "2025-01-18 22:08:04",
         "gps": [
-            43.65107,
-            -79.347015
+            43.659769103844376,
+            -79.3970771849791
         ],
-        "user_id": "2025-01-18T21:14:22.124373",
-        "chat_history": []
-    },
-    {
-        "location": "123",
-        "description": "456",
-        "severity": "Moderate",
-        "photo": null,
-        "timestamp": "2025-01-18T21:15:51.833722",
-        "gps": [
-            43.65107,
-            -79.347015
-        ],
-        "user_id": "2025-01-18T21:15:51.833722",
-        "chat_history": []
-    },
-    {
-        "location": "",
-        "description": "",
-        "severity": "Minor",
-        "photo": null,
-        "timestamp": "2025-01-18T21:23:36.692030",
-        "gps": [
-            43.65107,
-            -79.347015
-        ],
-        "user_id": "2025-01-18T21:23:36.692030",
+        "user_id": "user_1",
         "chat_history": []
     }
 ]

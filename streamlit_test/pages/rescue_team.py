@@ -55,33 +55,6 @@ def rescue_team_page():
     if not st.session_state["fire_reports"]:
         st.markdown("No reports available.")
 
-    # # 模拟数据（用于测试，可以用 resident.py 的数据代替）
-    # if not st.session_state["fire_reports"]:
-    #     st.session_state["fire_reports"] = [
-    #         {
-    #             "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=10),
-    #             "location": "Toronto, ON",
-    #             "description": "Major fire near downtown area.",
-    #             "severity": "Major",
-    #             "gps": [43.651070, -79.347015],
-    #             "photo": None,
-    #             "user_id": "user_1",
-    #             "chat_history": [
-    #                 {"sender": "user_1", "message": "Please send help!", "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=15)},
-    #             ]
-    #         },
-    #         {
-    #             "timestamp": datetime.datetime.now() - datetime.timedelta(minutes=30),
-    #             "location": "North York, ON",
-    #             "description": "Minor fire near a park.",
-    #             "severity": "Minor",
-    #             "gps": [43.761539, -79.411079],
-    #             "photo": None,
-    #             "user_id": "user_2",
-    #             "chat_history": []
-    #         },
-    #     ]
-
     # 主页面内容
     col1, col2 = st.columns([2, 1])
 
@@ -91,8 +64,6 @@ def rescue_team_page():
         # 显示所有火灾报告的定位点
         m = folium.Map(location=[43.7, -79.4], zoom_start=10)
         for report in st.session_state["fire_reports"]:
-            print("report")
-            print(report)
             folium.Marker(
                 location=report["gps"],
                 popup=report["description"],
@@ -128,7 +99,7 @@ def rescue_team_page():
                     if report["chat_history"]:
                         st.markdown("**Chat History:**")
                         for chat in report["chat_history"]:
-                            st.write(f"[{chat['timestamp'].strftime('%H:%M:%S')}] **{chat['sender']}**: {chat['message']}")
+                            st.write(f"[{chat['timestamp']}] **{chat['sender']}**: {chat['message']}")
                     
                     # 发送消息
                     st.markdown("---")
@@ -136,12 +107,18 @@ def rescue_team_page():
                     if st.button("Send", key=f"send_button_{idx}"):
                         if message:
                             # 保存消息到聊天记录
-                            report["chat_history"].append({
-                                "sender": "Rescue Team",
-                                "message": message,
-                                "timestamp": datetime.datetime.now()
-                            })
-                            st.success("Message sent successfully!")
+                            chat_data = {
+                                "user_id": report["user_id"],
+                                "chat": {
+                                    "sender": "Rescue Team",
+                                    "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                    "message": message
+                                }
+                            }
+                            response = add_history(chat_data)
+                            if response["status"] == "success":
+                                st.success("Message sent successfully!")
+                                st.session_state["fire_reports"] = request_fire_reports()
                         else:
                             st.error("Message cannot be empty.")
 
@@ -153,6 +130,16 @@ def request_fire_reports():
         return response.json()
     else:
         return []
+
+
+def add_history(data):
+    url = "http://localhost:5000/api/add_history"
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"status": "error", "message": "Failed to add chat history."}
 
 
 if __name__ == "__main__":
