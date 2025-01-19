@@ -1,0 +1,16 @@
+[Unit]
+Description=Streamlit Service for main.py
+After=network.target
+
+[Service]
+User=utek
+Group=www-data
+WorkingDirectory=/home/utek/utek_disaster_communication_system/streamlit_test
+ExecStart=/home/utek/miniconda3/envs/utek/bin/streamlit run main.py --server.port 8080 --server.headless=true
+
+# Restart policy
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Gunicorn Service for app_form_service
+After=network.target
+
+[Service]
+User=utek
+Group=www-data
+WorkingDirectory=/home/utek/utek_disaster_communication_system/streamlit_test/backend
+ExecStart=/home/utek/miniconda3/envs/utek/bin/gunicorn -w 2 -b 0.0.0.0:8000 app_form_service:app
+
+# Restart policy
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
