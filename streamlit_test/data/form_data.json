@@ -1,1 +1,79 @@
-[]
+[
+    {
+        "location": "MY",
+        "description": "Myhal320",
+        "severity": "Moderate",
+        "photo": null,
+        "timestamp": "2025-01-19 06:46:06",
+        "gps": [
+            43.6666368,
+            -79.3935872
+        ],
+        "user_id": "user_2025-01-19 06:46:03",
+        "chat_history": [
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-19 06:46:29",
+                "message": "go up-stairs"
+            }
+        ]
+    },
+    {
+        "location": "BA1180",
+        "description": "ohhh ",
+        "severity": "Minor",
+        "photo": null,
+        "timestamp": "2025-01-19 13:54:43",
+        "gps": [
+            43.6606502,
+            -79.3965209
+        ],
+        "user_id": "user_2025-01-19 13:54:06",
+        "chat_history": []
+    },
+    {
+        "location": "bahen",
+        "description": "bahen 2100",
+        "severity": "Minor",
+        "photo": null,
+        "timestamp": "2025-01-19 14:29:28",
+        "gps": [
+            43.6606502,
+            -79.3965209
+        ],
+        "user_id": "user_2025-01-19 14:27:51",
+        "chat_history": []
+    },
+    {
+        "location": "Bahen",
+        "description": "Testing",
+        "severity": "Major",
+        "photo": null,
+        "timestamp": "2025-01-19 14:33:38",
+        "gps": [
+            43.6569287,
+            -79.4033916
+        ],
+        "user_id": "user_2025-01-19 14:31:01",
+        "chat_history": []
+    },
+    {
+        "location": "bahen",
+        "description": "bahen3135",
+        "severity": "Minor",
+        "photo": null,
+        "timestamp": "2025-01-19 21:07:22",
+        "gps": [
+            43.659798,
+            -79.3974372
+        ],
+        "user_id": "user_2025-01-19 21:06:32",
+        "chat_history": [
+            {
+                "sender": "Rescue Team",
+                "timestamp": "2025-01-19 21:07:48",
+                "message": "finish your lab asap"
+            }
+        ]
+    }
+]

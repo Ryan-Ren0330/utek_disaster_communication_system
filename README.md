@@ -92,7 +92,7 @@ RESCUE_TEAM_PASSWORD=your_secure_password
 cd app
 python app_form_service.py
 ```
-The backend service will run on http://localhost:5000
+The backend service will run on http://localhost:8000
 
 2. In a new terminal, start the Streamlit application:
 ```bash

@@ -124,7 +124,7 @@ def rescue_team_page():
 
 
 def request_fire_reports():
-    url = "http://localhost:5000/api/fire_reports"
+    url = "http://localhost:8000/api/fire_reports"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
@@ -133,7 +133,7 @@ def request_fire_reports():
 
 
 def add_history(data):
-    url = "http://localhost:5000/api/add_history"
+    url = "http://localhost:8000/api/add_history"
     headers = {"Content-Type": "application/json"}
     response = requests.post(url, headers=headers, data=json.dumps(data))
     if response.status_code == 200:

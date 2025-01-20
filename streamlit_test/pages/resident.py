@@ -196,7 +196,7 @@ def resident_page():
 
 
 def submit_fire_report(data):
-    url = "http://localhost:5000/api/form"
+    url = "http://localhost:8000/api/form"
     headers = {"Content-Type": "application/json"}
     try:
         response = requests.post(url, headers=headers, data=json.dumps(data))
@@ -209,7 +209,7 @@ def submit_fire_report(data):
 
 
 def fetch_history(user_id):
-    url = "http://localhost:5000/api/fetch_chat_history"
+    url = "http://localhost:8000/api/fetch_chat_history"
     headers = {"Content-Type": "application/json"}
     data = {"user_id": user_id}
     response = requests.post(url, headers=headers, data=json.dumps(data))
