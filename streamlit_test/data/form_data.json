@@ -75,5 +75,18 @@
                 "message": "finish your lab asap"
             }
         ]
+    },
+    {
+        "location": "ba1190",
+        "description": "123",
+        "severity": "Major",
+        "photo": null,
+        "timestamp": "2025-02-18 17:34:45",
+        "gps": [
+            43.5254041,
+            -79.7007727
+        ],
+        "user_id": "user_2025-02-18 17:33:56",
+        "chat_history": []
     }
 ]
