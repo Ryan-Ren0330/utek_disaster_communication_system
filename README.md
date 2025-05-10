@@ -161,6 +161,14 @@ Common issues and solutions:
    - Check internet connection
    - Clear browser cache
 
+
+## 👥 Team Members
+
+- Yongkang Cheng
+- Zhenghao Ni  
+- Ryan Ren 
+- Wayne Wang 
+
 ## Contact
 
 For support or queries, please contact [zhenghao.ni@mail.utoronto.ca]
